@@ -26,6 +26,12 @@ public class DanmakuController {
     public TextField durationText;
     @FXML
     public VBox statusPane;
+    @FXML
+    public ToggleButton fetchToggleButton;
+    @FXML
+    public ToggleButton runToggleButton;
+    @FXML
+    public MenuButton monitorMenu;
 
     DanmakuManager manager;
 
@@ -45,7 +51,15 @@ public class DanmakuController {
 
     @FXML
     private void connect() {
-        alert("Connection", "Successful connected to server");
+        String url = serverText.getText();
+        int port = Integer.parseInt(portText.getText());
+        manager.setConnection(url, port);
+
+        if (manager.checkConnection()) {
+            alert("Successful", "Connected to server successfully!");
+        } else {
+            alert("Failed", "Fail to get connected to server!");
+        }
     }
 
 
@@ -56,12 +70,12 @@ public class DanmakuController {
 
     @FXML
     private void toggleFetch() {
-
+        manager.setOnFetch(fetchToggleButton.isSelected());
     }
 
     @FXML
     private void toggleRun() {
-
+        manager.setOnRun(runToggleButton.isSelected());
     }
 
     @FXML
@@ -76,7 +90,7 @@ public class DanmakuController {
 
     @FXML
     private void updateSettings() {
-        int f = Integer.parseInt(fontSizeText.getText());
+        Double f = Double.parseDouble(fontSizeText.getText());
         int d = Integer.parseInt(durationText.getText());
         manager.setDanmakuFontSize(f);
         manager.setDanmakuDuration(d);
@@ -98,7 +112,7 @@ public class DanmakuController {
         statusPane.getChildren().add(t);
     }
 
-    public void clearStatus(){
+    public void clearStatus() {
         statusPane.getChildren().clear();
     }
 }

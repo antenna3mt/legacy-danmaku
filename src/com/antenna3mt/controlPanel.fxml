@@ -59,10 +59,6 @@
                         <HBox>
                            <children>
                               <MenuButton fx:id="monitorMenu" mnemonicParsing="false" onAction="#setMonitor" text="Monitor">
-                                 <items>
-                                    <MenuItem mnemonicParsing="false" text="Action 1" />
-                                    <MenuItem mnemonicParsing="false" text="Action 2" />
-                                 </items>
                                  <HBox.margin>
                                     <Insets right="5.0" />
                                  </HBox.margin>

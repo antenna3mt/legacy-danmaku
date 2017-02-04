@@ -43,11 +43,11 @@ public class Danmaku {
     public static Color defaultFillColor = Color.WHITE;
     public static Color defaultStrokeColor = Color.BLACK;
     public static Integer defaultStrokeWidth = 3;
-    public static String defaultText = "Yi Jin 金燚";
+    public static String defaultText = "Sample Text";
     public static Integer defaultDuration = 16;
 
-    public static Font getDefaultFont(double size){
-        return Font.font("Microsoft Yahei", FontWeight.EXTRA_BOLD, size);
+    public static Font getDefaultFont(double size) {
+        return Font.font("Microsoft Yahei", FontWeight.BOLD, size);
     }
 
 
@@ -103,8 +103,12 @@ public class Danmaku {
         };
     }
 
+    public Danmaku(String text, Color color) {
+        this(text, defaultFont, color, defaultStrokeColor, defaultStrokeWidth, defaultDuration);
+    }
+
     public Danmaku(String text) {
-        this(text, defaultFont, defaultFillColor, defaultStrokeColor, defaultStrokeWidth, defaultDuration);
+        this(text, defaultFillColor);
     }
 
     public Danmaku() {
