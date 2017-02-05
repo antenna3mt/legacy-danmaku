@@ -33,8 +33,8 @@ public class Danmaku {
     public double x;
     public double y;
     public Boolean finished;
-    private double width;
-    private double height;
+    public double width;
+    public double height;
     public static double windowWidth;
     public static double windowHeight;
 
@@ -80,7 +80,7 @@ public class Danmaku {
         this.x = this.windowWidth;
         this.y = (new Random().nextDouble()) * (this.windowHeight - this.height) + this.height / 2;
 
-        Danmaku self = this;
+        final Danmaku self = this;
 
         this.transition = new Transition() {
             {

@@ -33,7 +33,7 @@ public class DanmakuManager extends Application {
     private Stage controlPanelStage;
     private DanmakuController controller;
     private GraphicsContext gc;
-    private Vector<Danmaku> danmakuList = new Vector<>();
+    private Vector<Danmaku> danmakuList = new Vector<Danmaku>();
 
     private Boolean onFetch = false;
     private Boolean onRun = true;
@@ -145,7 +145,7 @@ public class DanmakuManager extends Application {
      *
      */
     private void moveScreen(Screen screen) {
-        this.screen = Screen.getPrimary();
+        this.screen = screen;
         Danmaku.windowWidth = getWindowWidth();
         Danmaku.windowHeight = getWindowHeight();
     }
@@ -176,7 +176,7 @@ public class DanmakuManager extends Application {
         scene.setFill(Color.TRANSPARENT);
         stage.setX(getWindowX());
         stage.setY(getWindowY());
-        stage.setAlwaysOnTop(true);
+        //stage.setAlwaysOnTop(true);
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.setTitle("Display");
         stage.setScene(scene);
@@ -189,6 +189,7 @@ public class DanmakuManager extends Application {
         controller = loader.<DanmakuController>getController();
         stage.setTitle("Control Panel");
         stage.setScene(new Scene(root));
+        stage.setAlwaysOnTop(true);
         stage.getIcons().add(new Image("com/antenna3mt/icon.png"));
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             public void handle(WindowEvent we) {
@@ -206,7 +207,7 @@ public class DanmakuManager extends Application {
         setConnected(false);
         controller.runToggleButton.setSelected(onRun);
 
-        for (Screen screen : screens) {
+        for (final Screen screen : screens) {
             MenuItem mi = new MenuItem(Integer.toString(screen.hashCode()));
             mi.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
                 @Override
@@ -289,7 +290,7 @@ public class DanmakuManager extends Application {
             public void handle(long now) {
 
                 updateStatus();
-                gc.clearRect(0, 0, getWindowWidth(), getWindowHeight());
+                gc.clearRect(getWindowX(), getWindowY(), getWindowWidth(), getWindowHeight());
 
                 if (onRun) {
                     Iterator<Danmaku> i = danmakuList.iterator();
