@@ -171,6 +171,8 @@ public class DanmakuManager extends Application {
 
     private void openDisplayWindow(Stage stage) {
         Canvas canvas = new Canvas(getWindowWidth(), getWindowHeight());
+        canvas.setCache(true);
+        canvas.setCacheHint(CacheHint.DEFAULT);
         gc = canvas.getGraphicsContext2D();
         Scene scene = new Scene(new Group(canvas), getWindowWidth(), getWindowHeight());
         scene.setFill(Color.TRANSPARENT);
